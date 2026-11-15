@@ -1,0 +1,250 @@
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/rajdhani-500.woff') format('woff'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/rajdhani-700.woff') format('woff'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/inter-400.woff') format('woff'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/inter-500.woff') format('woff'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/inter-600.woff') format('woff'); }
+
+/* ---------- Marke: dieselben Werte wie Shop, Events und Spotify ---------- */
+:root {
+  --black: #000000;
+  --night: #0a0a0d;
+  --panel: #121215;
+  --gold: #c9a84c;
+  --gold-hi: #e8c96d;
+  --blood: #6b0f1a;
+  --bone: #edeae2;
+  --ash: #9a948a;
+  --line: rgba(237, 234, 226, 0.1);
+  --display: 'Rajdhani', 'Arial Narrow', system-ui, sans-serif;
+  --body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pad: clamp(18px, 4vw, 48px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+::selection { background: rgba(201,168,76,0.3); color: var(--bone); }
+
+body {
+  background: var(--black);
+  color: var(--bone);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+#particle-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.bar, main, .foot { position: relative; z-index: 1; }
+
+.skip { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--gold); color: var(--black); padding: 8px 14px; font-weight: 600; }
+.skip:focus { left: 8px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ---------- Leiste, wie im Shop ---------- */
+.bar {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px var(--pad);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.bar.scrolled { border-bottom-color: var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
+.brand img { width: 26px; height: auto; }
+.brand span { font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Zurueck zu allen Kanaelen */
+.nw-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 0 16px 0 12px;
+  border: 1px solid rgba(201, 168, 76, 0.4); border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--bone); text-decoration: none; white-space: nowrap;
+  font-family: var(--display);
+  font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.nw-back:hover, .nw-back:focus-visible { border-color: var(--gold); color: var(--gold); background: rgba(201, 168, 76, 0.08); }
+.nw-back svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+main {
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+  padding: clamp(32px, 7vw, 64px) var(--pad) 72px;
+  display: flex; flex-direction: column; gap: clamp(40px, 7vw, 60px);
+}
+
+/* ---------- Seitenkopf ---------- */
+.page-head { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.page-head img { width: 78px; height: auto; margin-bottom: 4px; }
+.page-sub { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ash); }
+.page-title {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(2.4rem, 10vw, 4.2rem); line-height: 0.95;
+  letter-spacing: 0.02em; text-transform: uppercase;
+}
+.page-line { max-width: 44ch; color: var(--ash); font-size: clamp(1rem, 1.6vw, 1.08rem); text-wrap: balance; }
+
+/* ---------- Abschnitte, wie die Kollektionskoepfe im Shop ---------- */
+.group { display: flex; flex-direction: column; gap: 20px; }
+.block-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 18px; }
+.block-head h2 {
+  font-family: var(--display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.6rem, 5.5vw, 2.4rem); line-height: 1; letter-spacing: 0.02em;
+}
+
+/* ---------- Reichweite, wie der Countdown im Shop ---------- */
+.stats { display: grid; grid-template-columns: repeat(var(--count), 1fr); }
+.stat { display: flex; flex-direction: column; align-items: center; padding: 8px 6px; text-align: center; }
+.stat + .stat { border-left: 1px solid var(--line); }
+.stat-num {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(2rem, 7vw, 3rem); line-height: 1;
+  color: var(--gold); font-variant-numeric: tabular-nums;
+}
+.stat-label { color: var(--ash); font-size: 0.82rem; margin-top: 8px; }
+
+/* ---------- Partner, wie die Karten auf der Eventseite ---------- */
+.block { display: grid; gap: 10px; }
+.partner-card {
+  position: relative;
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 16px 12px 12px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.partner-card:hover { border-color: var(--gold); background: rgba(201, 168, 76, 0.08); transform: translateY(-2px); }
+
+/* Goldene Eckwinkel, das Markenzeichen */
+.partner-card::after {
+  content: ''; position: absolute; inset: 5px; pointer-events: none;
+  --c: var(--gold); --l: 10px; --w: 2px;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--w) var(--l) no-repeat;
+  opacity: 0; transform: scale(1.06);
+  transition: opacity 0.25s, transform 0.35s var(--ease);
+}
+.partner-card:hover::after, .partner-card:focus-within::after { opacity: 1; transform: none; }
+
+.partner-icon { width: 48px; height: 48px; flex: none; overflow: hidden; border-radius: 2px; background: var(--night); display: grid; place-items: center; }
+.partner-icon img { width: 100%; height: 100%; object-fit: cover; }
+.partner-icon img.ph { width: 60%; height: auto; object-fit: contain; opacity: 0.35; }
+.partner-name { font-family: var(--display); font-weight: 700; font-size: 1.2rem; line-height: 1.1; letter-spacing: 0.03em; text-transform: uppercase; }
+.partner-cat { color: var(--ash); font-size: 0.85rem; margin-top: 2px; }
+.partner-link {
+  margin-left: auto; flex: none;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px;
+  color: var(--gold); text-decoration: none;
+  font-family: var(--display); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.partner-link:hover { color: var(--gold-hi); }
+.partner-link::before { content: ''; position: absolute; inset: 0; border-radius: 10px; }
+
+/* ---------- Anfrage, wie das Anmeldeformular der Eventseite ---------- */
+.form-card {
+  display: grid; gap: 18px;
+  background: var(--night); border: 1px solid var(--line);
+  padding: clamp(20px, 4vw, 28px);
+}
+.field { display: grid; gap: 8px; }
+.field label { font-size: 0.9rem; color: var(--ash); }
+.form-card input[type="text"], .form-card input[type="email"], .form-card textarea {
+  width: 100%; min-height: 46px;
+  background: var(--black);
+  border: 1px solid rgba(237,234,226,0.22); border-radius: 2px;
+  padding: 10px 12px;
+  color: var(--bone); font-family: inherit; font-size: 0.95rem; line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+.form-card input::placeholder, .form-card textarea::placeholder { color: #5f5a52; }
+.form-card input:hover, .form-card textarea:hover { border-color: rgba(237,234,226,0.4); }
+.form-card input:focus, .form-card textarea:focus { outline: none; border-color: var(--gold); }
+
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; color: var(--ash); line-height: 1.5; cursor: pointer; }
+.consent input { margin-top: 4px; accent-color: var(--gold); flex-shrink: 0; width: 16px; height: 16px; }
+.consent a { color: var(--gold); text-underline-offset: 3px; }
+
+/* ---------- Goldener Knopf, identisch zum Shop ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 52px; padding: 0 24px;
+  background: var(--gold); color: var(--black);
+  font-family: var(--display); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.2s var(--ease);
+}
+.btn:hover { background: var(--gold-hi); }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { background: #3a3629; color: #8a8270; cursor: wait; }
+
+.msg-error, .msg-success { display: none; font-size: 0.88rem; text-align: center; }
+.msg-error { color: #c98a8a; }
+.msg-success { color: #4f9d69; }
+
+/* ---------- Fuss, wie im Shop ---------- */
+.foot { border-top: 1px solid var(--line); padding: 56px var(--pad) 44px; display: grid; gap: 28px; justify-items: center; text-align: center; }
+.foot-brand { display: flex; align-items: center; gap: 14px; }
+.foot-brand img { width: 36px; height: auto; }
+.foot-brand p { font-family: var(--display); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; }
+.foot-links a { color: var(--ash); text-decoration: none; font-size: 0.9rem; padding: 11px 4px; transition: color 0.2s; }
+.foot-links a:hover, .foot-links a:focus-visible { color: var(--gold); }
+.foot-copy { color: #5f5a52; font-size: 0.82rem; }
+
+/* ---------- Bewegung ---------- */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes crownFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.fade { animation: fadeUp 0.6s var(--ease) both; }
+main > .fade:nth-child(2) { animation-delay: 0.08s; }
+main > .fade:nth-child(3) { animation-delay: 0.16s; }
+main > .fade:nth-child(4) { animation-delay: 0.24s; }
+.page-head img { animation: crownFloat 6s ease-in-out 1.2s infinite; }
+
+/* ---------- Mobil ---------- */
+@media (max-width: 560px) {
+  .brand span { font-size: 1rem; }
+  .nw-back { font-size: 0.78rem; padding: 0 12px 0 9px; }
+  /* Reichweite: auf dem Handy ausgewogen in Reihen */
+  .stats { grid-template-columns: repeat(6, 1fr); row-gap: 18px; }
+  .stat { grid-column: span 2; border-left: 0 !important; }
+  .stats[data-count="1"] .stat { grid-column: span 6; }
+  .stats[data-count="2"] .stat, .stats[data-count="4"] .stat { grid-column: span 3; }
+  .stats[data-count="5"] .stat:nth-last-child(-n+2) { grid-column: span 3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .page-head img { animation: none !important; }
+}

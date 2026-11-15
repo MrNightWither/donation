@@ -1,0 +1,164 @@
+/* NightWither Unterstützungs-Seite – übernommen von der Kooperations-Seite (15.11.2026)
+   Großer Schriftzug, Laufband, große Reichweite-Zahlen, Block „Was möglich ist“, Anfrage zweispaltig.
+   kooperation.js und die Formularfelder bleiben unberührt.
+   Zurücksetzen: in index.html die zwei Zeilen mit „auftritt“ entfernen. */
+
+/* ---------- Leiste: goldene Fortschrittslinie ---------- */
+.bar::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-hi));
+  transform: scaleX(var(--prog, 0)); transform-origin: left;
+  pointer-events: none;
+}
+
+/* ---------- Kopf ---------- */
+main { max-width: 1080px; padding-top: 0; gap: clamp(44px, 7vw, 84px); }
+.page-head { position: relative; padding: clamp(36px, 7vw, 84px) 0 clamp(4px, 2vw, 20px); gap: 12px; }
+.page-head::before {
+  content: ''; position: absolute; left: 50%; top: 0; z-index: -1; pointer-events: none;
+  width: min(520px, 90vw); aspect-ratio: 1; transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(201, 168, 76, 0.16), transparent 70%);
+  animation: glimmen 5.5s ease-in-out infinite;
+}
+@keyframes glimmen { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+.page-head img { width: clamp(78px, 10vw, 112px); }
+.page-eyebrow { color: var(--gold); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; }
+.page-title { font-size: clamp(3.2rem, 15vw, 8.6rem); line-height: 0.86; letter-spacing: 0.01em; }
+.page-title .gold { display: block; }
+.gold { color: var(--gold); }
+.page-line { margin-top: 12px; }
+.page-head .btn-gold { margin-top: 14px; }
+.page-head > * { animation: fadeUp 0.7s var(--ease) both; }
+.page-head > :nth-child(2) { animation-delay: 0.08s; }
+.page-head > :nth-child(3) { animation-delay: 0.14s; }
+.page-head > :nth-child(4) { animation-delay: 0.2s; }
+.page-head > :nth-child(5) { animation-delay: 0.26s; }
+.page-head img { animation: fadeUp 0.7s var(--ease) both, crownFloat 6s ease-in-out 1.2s infinite; }
+
+/* ---------- Goldknopf mit Lichtstreifen ---------- */
+.btn-gold {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 0 30px;
+  background: var(--gold); color: var(--black); text-decoration: none;
+  font-family: var(--display); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.2s var(--ease);
+}
+.btn-gold:hover { background: var(--gold-hi); }
+.btn-gold:active { transform: scale(0.98); }
+.btn { position: relative; overflow: hidden; }
+.btn-gold::before, .btn::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: translateX(-130%) skewX(-18deg);
+  transition: transform 0.75s var(--ease);
+  pointer-events: none;
+}
+.btn-gold:hover::before, .btn-gold:focus-visible::before,
+.btn:hover::before, .btn:focus-visible::before { transform: translateX(330%) skewX(-18deg); }
+.btn:disabled::before { display: none; }
+
+/* ---------- Laufband über die ganze Breite ---------- */
+.band { position: relative; height: clamp(84px, 11vw, 120px); margin-inline: calc(50% - 50vw); overflow: hidden; }
+.band-in {
+  position: absolute; left: -10%; top: 28%; width: 120%;
+  padding: 11px 0; overflow: hidden;
+  background: var(--blood);
+  transform: rotate(-2.2deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+.band-track { display: flex; width: max-content; animation: bandLauf 46s linear infinite; }
+.band-track span {
+  display: inline-flex; align-items: center; gap: 18px; padding-right: 18px;
+  font-family: var(--display); font-weight: 700; text-transform: uppercase; white-space: nowrap;
+  font-size: clamp(1.05rem, 2vw, 1.45rem); letter-spacing: 0.04em; line-height: 1; color: var(--bone);
+}
+.band-track img { width: 20px; height: auto; filter: brightness(0) invert(0.93); }
+@keyframes bandLauf { to { transform: translateX(-50%); } }
+
+/* ---------- Abschnittsköpfe ---------- */
+.group { gap: 24px; }
+.block-head { padding-top: 22px; }
+.block-head h2 { font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: 0.01em; }
+.block-note { color: var(--ash); font-size: 0.9rem; text-align: right; max-width: 30ch; }
+
+/* ---------- Reichweite: große Zahlen ---------- */
+.stats { padding: clamp(8px, 2vw, 20px) 0; }
+.stat { padding: 14px 8px; }
+.stat-num { font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: 0.9; }
+.stat-label { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.82rem; margin-top: 12px; }
+
+/* ---------- Was möglich ist ---------- */
+.wege { display: grid; gap: 14px; }
+.weg {
+  position: relative; display: flex; flex-direction: column; gap: 12px;
+  padding: 26px 24px 28px; min-height: 210px;
+  background: linear-gradient(180deg, rgba(18, 18, 21, 0.9), rgba(10, 10, 13, 0.9));
+  border: 1px solid var(--line); border-radius: 2px;
+  transition: border-color 0.25s var(--ease), transform 0.35s var(--ease);
+}
+.weg::before {
+  content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 2px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.weg:hover { border-color: rgba(201, 168, 76, 0.45); transform: translateY(-3px); }
+.weg:hover::before { transform: scaleX(1); }
+.weg-nr { font-family: var(--display); font-weight: 700; font-size: 1rem; letter-spacing: 0.16em; color: var(--gold); font-variant-numeric: tabular-nums; }
+.weg h3 { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(1.6rem, 3vw, 2.1rem); line-height: 1; letter-spacing: 0.01em; }
+.weg p { color: var(--ash); font-size: 0.98rem; max-width: 34ch; }
+@media (min-width: 760px) { .wege { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------- Partner: kantig, zwei Spalten am Desktop ---------- */
+.partner-card { border-radius: 2px; padding: 16px 20px 16px 16px; }
+.partner-card::after { opacity: 0.4; transform: none; inset: 7px; --l: 12px; }
+.partner-link::before { border-radius: 2px; }
+.partner-icon { width: 56px; height: 56px; }
+.partner-name { font-size: 1.35rem; }
+@media (min-width: 760px) { .block { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+
+/* ---------- Anfrage: Text links, Formular rechts ---------- */
+.anfrage { display: grid; gap: 28px; padding-top: 26px; border-top: 1px solid var(--line); }
+.anfrage-text { display: flex; flex-direction: column; gap: 16px; }
+.anfrage-text h2 {
+  font-family: var(--display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(2.6rem, 8.5vw, 5.4rem); line-height: 0.9; letter-spacing: 0.01em;
+}
+.anfrage-text p { color: var(--ash); max-width: 40ch; }
+.anfrage-text a { display: inline-block; padding: 10px 0; color: var(--gold); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.anfrage-text a:hover { color: var(--gold-hi); }
+.form-card { border-radius: 2px; background: linear-gradient(180deg, var(--panel), var(--night)); }
+@media (min-width: 900px) {
+  .anfrage { grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .anfrage-text { position: sticky; top: 96px; }
+}
+
+/* ---------- Einblenden beim Scrollen (Klassen setzt auftritt.js) ---------- */
+.rv {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.7s ease var(--rv-d, 0ms), transform 0.8s var(--ease) var(--rv-d, 0ms);
+}
+.rv.rv-in { opacity: 1; transform: none; }
+/* Der Schnitt liegt auf der inneren Hülle: ein ganz weggeschnittenes Element gilt für den Browser als unsichtbar */
+.rv-h .rv-hi {
+  display: block;
+  clip-path: inset(0 0 100% 0); transform: translateY(0.3em);
+  transition: clip-path 0.9s var(--ease) var(--rv-d, 0ms), transform 0.9s var(--ease) var(--rv-d, 0ms);
+}
+.rv-h.rv-in .rv-hi { clip-path: inset(-0.15em 0 -0.15em 0); transform: none; }
+
+.foot-links a { transition: color 0.2s, transform 0.3s var(--ease); }
+.foot-links a:hover { transform: translateY(-2px); }
+
+@media (max-width: 600px) {
+  .block-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .block-note { text-align: left; }
+  .weg { min-height: 0; padding: 22px 20px 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-head::before, .band-track { animation: none !important; }
+  .btn-gold::before, .btn::before { display: none; }
+  .rv, .rv-h .rv-hi { opacity: 1; transform: none; clip-path: none; }
+}
