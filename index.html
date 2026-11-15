@@ -4,8 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NightWither Unterstützung</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Unterstützung für NightWither Unity – bald verfügbar.">
 <style>
+  /* Schriften liegen im Ordner fonts/ – es wird nichts von Google geladen */
+  @font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/rajdhani-500.woff') format('woff'); }
+  @font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/rajdhani-700.woff') format('woff'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/inter-400.woff') format('woff'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/inter-500.woff') format('woff'); }
+  .legal { margin-top: 40px; font-size: 0.8rem; color: #8f8a80; animation: fadeUp 0.7s ease 0.7s both; }
+  .legal a { display: inline-block; padding: 10px 6px; color: #8f8a80; text-decoration: none; }
+  .legal a:hover, .legal a:focus-visible { color: #c9a84c; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: #0a0a0d;
@@ -73,5 +83,6 @@
   <div class="coming">Bald <span>verfügbar</span></div>
   <div class="sub">Möglichkeiten zur Unterstützung folgen in Kürze.</div>
   <a class="link" href="https://nightwither.de">← Zurück zu nightwither.de</a>
+  <p class="legal"><a href="https://impressum.nightwither.de">Impressum</a> · <a href="https://datenschutz.nightwither.de">Datenschutz</a></p>
 </body>
 </html>
