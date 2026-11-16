@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unterstützung — NightWither Unity</title>
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://firestore.googleapis.com; base-uri 'none'; form-action 'none'">
 <meta name="description" content="So kannst du NightWither Unity unterstützen: dabei sein, Subs, Bits, Discord Boosts und der Shop.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -14,7 +14,7 @@
 <link rel="preload" href="fonts/rajdhani-700.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="basis.css?v=20261115a">
 <link rel="stylesheet" href="auftritt.css?v=20261115a">
-<link rel="stylesheet" href="unterstuetzung.css?v=20261115a">
+<link rel="stylesheet" href="unterstuetzung.css?v=20261115b">
 </head>
 <body>
 
@@ -68,40 +68,46 @@
     </div>
   </section>
 
-  <section class="group" aria-labelledby="streamTitle">
+  <section class="group" aria-labelledby="streamTitle" data-nur-mit-karten>
     <div class="block-head"><h2 id="streamTitle">Im <span class="gold">Stream</span></h2><p class="block-note">Dort, wo du sowieso zuschaust</p></div>
-    <div class="wege">
-      <article class="weg">
+    <div class="wege frei">
+      <article class="weg" data-weg="twitch">
         <div class="weg-kopf"><span class="weg-nr">04</span><span class="weg-marke">Abos · Bits</span></div>
         <h3>Twitch</h3>
         <p>Mit einem Abo unterstützt du den Kanal jeden Monat. Bits schickst du direkt im Chat.</p>
         <a class="weg-link" href="https://twitch.tv/mrnightwither" target="_blank" rel="noopener noreferrer">Zu Twitch</a>
       </article>
-      <article class="weg">
+      <article class="weg" data-weg="kick">
         <div class="weg-kopf"><span class="weg-nr">05</span><span class="weg-marke">Abos · Geschenke</span></div>
         <h3>Kick</h3>
         <p>Auch auf Kick kannst du den Kanal abonnieren oder ein Abo verschenken.</p>
         <a class="weg-link" href="https://kick.com/mrnightwither" target="_blank" rel="noopener noreferrer">Zu Kick</a>
       </article>
-      <article class="weg">
+      <article class="weg" data-weg="tiktok">
         <div class="weg-kopf"><span class="weg-nr">06</span><span class="weg-marke">Geschenke</span></div>
         <h3>TikTok</h3>
         <p>Im TikTok Live schickst du Geschenke direkt aus der App.</p>
         <a class="weg-link" href="https://www.tiktok.com/@mrnightwither_" target="_blank" rel="noopener noreferrer">Zu TikTok</a>
       </article>
+      <article class="weg" data-weg="youtube" hidden>
+        <div class="weg-kopf"><span class="weg-nr">00</span><span class="weg-marke">Mitgliedschaft · Super Chat</span></div>
+        <h3>YouTube</h3>
+        <p>Auf YouTube kannst du Kanalmitglied werden oder im Live einen Super Chat schicken.</p>
+        <a class="weg-link" href="https://youtube.com/@MrNightwither" target="_blank" rel="noopener noreferrer">Zu YouTube</a>
+      </article>
     </div>
   </section>
 
-  <section class="group" aria-labelledby="commTitle">
+  <section class="group" aria-labelledby="commTitle" data-nur-mit-karten>
     <div class="block-head"><h2 id="commTitle">In der <span class="gold">Community</span></h2></div>
-    <div class="wege zwei">
-      <article class="weg">
+    <div class="wege frei">
+      <article class="weg" data-weg="boost">
         <div class="weg-kopf"><span class="weg-nr">07</span><span class="weg-marke">Discord</span></div>
         <h3>Server Boost</h3>
         <p>Ein Boost schaltet für alle auf dem Discord Server bessere Tonqualität und mehr Emojis frei.</p>
         <a class="weg-link" href="https://discord.gg/EThzYwM42u" target="_blank" rel="noopener noreferrer">Zum Server</a>
       </article>
-      <article class="weg">
+      <article class="weg" data-weg="shop">
         <div class="weg-kopf"><span class="weg-nr">08</span><span class="weg-marke">Shop</span></div>
         <h3>Streetwear</h3>
         <p>Streetwear aus der Nacht. Der erste Drop ist in Vorbereitung.</p>
@@ -112,7 +118,13 @@
 
   <section class="group" aria-labelledby="direktTitle" data-nur-mit-karten hidden>
     <div class="block-head"><h2 id="direktTitle">Direkt <span class="gold">unterstützen</span></h2></div>
-    <div class="wege zwei">
+    <div class="wege frei">
+      <article class="weg" data-weg="paypal" hidden>
+        <div class="weg-kopf"><span class="weg-nr">00</span><span class="weg-marke">PayPal</span></div>
+        <h3>PayPal</h3>
+        <p>Einmalig etwas dalassen. Die Zahlung läuft über PayPal.</p>
+        <a class="weg-link" href="https://nightwither.de" target="_blank" rel="noopener noreferrer">Zu PayPal</a>
+      </article>
       <article class="weg" data-weg="kofi" hidden>
         <div class="weg-kopf"><span class="weg-nr">09</span><span class="weg-marke">Ko-fi</span></div>
         <h3>Ko-fi</h3>
@@ -124,6 +136,12 @@
         <h3>Trinkgeld</h3>
         <p>Ein freiwilliges Trinkgeld, auf Wunsch mit Nachricht im Stream.</p>
         <a class="weg-link" href="https://nightwither.de" target="_blank" rel="noopener noreferrer">Trinkgeld geben</a>
+      </article>
+      <article class="weg" data-weg="wunschliste" hidden>
+        <div class="weg-kopf"><span class="weg-nr">00</span><span class="weg-marke">Wunschliste</span></div>
+        <h3>Wunschliste</h3>
+        <p>Etwas von der Wunschliste aussuchen und direkt bestellen.</p>
+        <a class="weg-link" href="https://nightwither.de" target="_blank" rel="noopener noreferrer">Zur Wunschliste</a>
       </article>
     </div>
     <p class="hinweis"><strong>Gut zu wissen:</strong> Das ist eine freiwillige Unterstützung ohne Gegenleistung. Eine Spendenquittung kann ich nicht ausstellen.</p>
@@ -165,7 +183,7 @@
 </footer>
 
 <script src="funken.js?v=20261115a"></script>
-<script src="wege.js?v=20261115a"></script>
+<script src="wege.js?v=20261115b"></script>
 <script src="auftritt.js?v=20261115a"></script>
 </body>
 </html>

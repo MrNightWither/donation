@@ -4,6 +4,8 @@
 /* ---------- Karten mit Link-Knopf ---------- */
 .wege.zwei { grid-template-columns: 1fr; }
 @media (min-width: 760px) { .wege.zwei { grid-template-columns: repeat(2, 1fr); } }
+/* Abschnitte, deren Karten im Admin Panel an- und ausgeschaltet werden: Spalten passen sich der Anzahl an */
+@media (min-width: 760px) { .wege.frei { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } }
 .weg { min-height: 230px; }
 .weg-marke { color: var(--ash); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; }
 .weg-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
