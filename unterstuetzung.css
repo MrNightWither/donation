@@ -1,6 +1,9 @@
 /* NightWither Unterstützungs-Seite – nur das, was diese Seite zusätzlich braucht (15.11.2026)
    Grundstil: basis.css. Schriftzug, Laufband, Karten und Bewegung: auftritt.css. */
 
+/* ---------- Schriftzug: mehr Luft, weil die Punkte vom „Ä“ nach oben ragen ---------- */
+.page-title { line-height: 0.96; margin-top: 0.1em; }
+
 /* ---------- Karten mit Link-Knopf ---------- */
 .wege.zwei { grid-template-columns: 1fr; }
 @media (min-width: 760px) { .wege.zwei { grid-template-columns: repeat(2, 1fr); } }
